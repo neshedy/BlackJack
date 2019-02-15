@@ -1,5 +1,8 @@
 #include <iostream>
-
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
+// a simple blackjack program written in cpp
 using namespace std;
 
 class Card{
@@ -11,8 +14,8 @@ class Card{
 
 class Player{
 	public:
-		int handValue;
-		int aceCount;
+		int handValue = 0;
+		int aceCount = 0;
 };
 
 class Computer{
@@ -37,24 +40,20 @@ class Computer{
 			for (cardCount; cardCount < 52; cardCount++) {
 				cout << card[cardCount].type << card[cardCount].suite << endl;
 				player.handValue += card[cardCount].value;
+				if (card[cardCount].value == 1) {
+					player.aceCount++;
+				}
 				cardCount++;
 				break;
 			}	
 		}
 
 		void Shuffle() {
-			for (int i = 0; i < 52; i++) {
-				int r = rand() % 52;
-				int temp = suiteA[i];
-				suiteA[i] = suiteA[r];
-				suiteA[r] = temp;
-			}
-			for (int i = 0; i < 52; i++) {
-				int r = rand() % 52;
-				int temp = typeA[i];
-				typeA[i] = typeA[r];
-				typeA[r] = temp;
-			}
+
+			random_shuffle(begin(suiteA), end(suiteA));
+
+			random_shuffle(begin(typeA), end(typeA));
+			
 			for (int i = 0; i < 52; i++) {
 				card[i].suite = suiteA[i];
 				card[i].type = typeA[i];
@@ -65,7 +64,6 @@ class Computer{
 			for (int i = 0; i < 52; i++){
 				switch(card[i].type) {
 					case 'A': card[i].value = 1;
-					player.aceCount++;
 					break;
 					case '2': card[i].value = 2;
 					break;
