@@ -93,6 +93,28 @@ class Computer{
 				}
 			}
 		};
+		
+		void IfN() {
+                if (player.handValue < 11 && player.aceCount > 0)
+                {
+                    cout << player.handValue + 10 << endl;
+                }
+                else if (player.handValue == 21 ||
+                         (player.handValue == 11 && player.aceCount == 1))
+                {
+                    cout << "21" << endl;
+                }
+                else if (player.handValue < 21)
+                {
+                    cout << player.handValue << endl;
+                }
+                else if (player.handValue > 21)
+                {
+                    cout << "Bust" << endl;
+                }
+                player.handValue = 0;
+				player.aceCount = 0;
+		};
 };
 
 int main() {
@@ -101,37 +123,16 @@ int main() {
 	computer.Shuffle();
 	bool shouldplay = true;
 	while (shouldplay == true) {
-	char tempchar;
-	cin >> tempchar;
-	if (tempchar == 'y') {
-	computer.DealCard();
-	}
-	else if (tempchar == 's') {
-		computer.Shuffle();
-	}
-	else if (tempchar == 'n') {
-                if (computer.player.handValue < 11 && computer.player.aceCount > 0)
-                {
-                    cout << computer.player.handValue + 10 << endl;
-                }
-                else if (computer.player.handValue == 21 ||
-                         (computer.player.handValue == 11 && computer.player.aceCount == 1))
-                {
-                    cout << "21" << endl;
-                }
-                else if (computer.player.handValue < 21)
-                {
-                    cout << computer.player.handValue << endl;
-                }
-                else if (computer.player.handValue > 21)
-                {
-                    cout << "Bust" << endl;
-                }
-                computer.player.handValue = 0;
-				computer.player.aceCount = 0;
-			}
+		char tempchar;
+		cin >> tempchar;
+		if (tempchar == 'y') {
+		computer.DealCard();
 		}
-	int tempint;
-	cin >> tempint;
-	return 0;
+		else if (tempchar == 's') {
+			computer.Shuffle();
+		}
+		else if (tempchar == 'n') {
+			computer.IfN();
+		}
+	}
 }
