@@ -42,7 +42,7 @@ class Computer{
 				}
 				cardCount++;
 				break;
-			}	
+			}
 		}
 
 		void Shuffle() {
@@ -62,9 +62,6 @@ class Computer{
 				card[i].suite = suiteA[i];
 				card[i].type = typeA[i];
 			}
-		};
-		
-		void InitializeValue() {
 			for (int i = 0; i < 52; i++){
 				switch(card[i].type) {
 					case 'A': card[i].value = 1;
@@ -99,15 +96,18 @@ class Computer{
 };
 
 int main() {
+	cout << "s to shuffle, y to deal card, n to pass" << endl;
 	Computer computer;
 	computer.Shuffle();
-	computer.InitializeValue();
 	bool shouldplay = true;
 	while (shouldplay == true) {
 	char tempchar;
 	cin >> tempchar;
 	if (tempchar == 'y') {
 	computer.DealCard();
+	}
+	else if (tempchar == 's') {
+		computer.Shuffle();
 	}
 	else if (tempchar == 'n') {
                 if (computer.player.handValue < 11 && computer.player.aceCount > 0)
