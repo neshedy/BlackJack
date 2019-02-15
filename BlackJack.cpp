@@ -1,7 +1,4 @@
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <algorithm>
 // a simple blackjack program written in cpp
 using namespace std;
 
@@ -49,11 +46,18 @@ class Computer{
 		}
 
 		void Shuffle() {
-
-			random_shuffle(begin(suiteA), end(suiteA));
-
-			random_shuffle(begin(typeA), end(typeA));
-			
+			for (int i = 0; i < 52; i++) {
+				int r = rand() % 52;
+				int temp = suiteA[i];
+				suiteA[i] = suiteA[r];
+				suiteA[r] = temp;
+			}			
+			for (int i = 0; i < 52; i++) {
+				int r = rand() % 52;
+				int temp = typeA[i];
+				typeA[i] = typeA[r];
+				typeA[r] = temp;
+			}
 			for (int i = 0; i < 52; i++) {
 				card[i].suite = suiteA[i];
 				card[i].type = typeA[i];
